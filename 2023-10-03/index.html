@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            
+        function x (parameter) {
+        if (parameter === 0) {
+            throw new Error ("Fehler!");
+        }
+        else{
+            console.log("Kein Fehler");
+        }
+        }
+
+        for (let i=0; i < 20; i++){
+        const randomparameter = random();
+        try {
+            let  random = Math.floor(Math.random() * 20) + 1;
+            throwError(random);
+        } catch (Error) {
+        console.log(error)
+        }
+        }
+    </script>
+</body>
+</html>
