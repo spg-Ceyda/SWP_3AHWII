@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button onclick="clickButton()">Click me</button>
+    <div id="output"></div>
+
+    <script>
+        function clickButton(){
+        let random = Math.random()-0.5;
+        let neuesPromise = new Promise (function(resolve,reject){
+            if (random > 0)
+            resolve(random);
+            else {
+            reject('Fehler');
+            }
+
+    });
+        
+            
+        neuesPromise
+        .then(function(random){
+            displayResult('Richtig',random)
+        })
+        .catch(function(error){
+            displayResult('Falsch', error);
+        });
+        }
+        function displayResult(message, random){
+            let output = document.getElementById('output');
+            output.innerHTML = '${message}: ${value}';
+
+            if (message === 'Falsch'){ 
+                output.innerText= 'falsch';
+                output.style.backgroundColor = 'red';
+            }
+            else {
+                output.innerHTML= 'richtig'
+                output.style.backgroundColor = 'white';
+            }
+        }
+    </script>
+</body>
+</html>
