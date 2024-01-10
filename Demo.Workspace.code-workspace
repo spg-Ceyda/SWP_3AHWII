@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../array-bungen-spg-Ceyda"
+		},
+		{
+			"path": "../sj23-24-3ahwii-swp1x"
+		},
+		{
+			"name": "arrays-2nd-spg-Ceyda",
+			"path": "../arrays-2nd-spg-Ceyda"
+		},
+		{
+			"name": "plf2-spg-Ceyda",
+			"path": "../plf2-spg-Ceyda"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "arrays-2nd-spg-Ceyda"
+	}
+}
