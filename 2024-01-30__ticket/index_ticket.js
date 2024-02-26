@@ -12,12 +12,12 @@ class TicketAutomat {
         this.#eingeworfen += geld;
     }
     zielEinstellen(ziel) {
-        const preis = zieleUndPreise[ziel];
-        if (preis == undefined) {
+        if (zieleUndPreise[ziel] === undefined) {
             throw new Error('Dorthin fahre ich nicht');
         }
         this.#ziel = ziel;
     }
+    
     set einnahmenGesamt(was) {
         this.#einnahmenGesamt = was;
     }

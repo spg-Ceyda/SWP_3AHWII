@@ -11,34 +11,49 @@
     h1 {
             font-family: 'Georgia', serif; 
             color: red; 
+            font-size: 40px;
         }
     h2 {
         font-family: 'Open Sans', sans-serif;
-        font-size: 20px;
+        font-size: 28px;
+        margin-left: 10px;
     }
     button {
         background-color: red;
         color: black;
-        font-size: large;
+        font-size: x-large;
     }
     body {
         background-color: #ffcccc;
     }
+    label{
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        width: 100%;
+    }
+    
 </style>
 
 <body>
     <!-- von ceyda arslan -->
-    <h1>Ticketautomat</h1>
+    <h1><center>Ticketautomat</center></h1>
     <h2><label for="einwerfen">Guthaben einwerfen:</label>
-        <input type="number" id="€" placeholder="einwerfen"> <br>
+        <input type="number" id="€" placeholder="einwerfen €"><br> <br>
     
         <label for="ziel">Ziel einstellen:</label>
-        <select name="Ziel einstellen" id="ziel" placeholder="Ziel einstellen"></select> <br>
+        <select name="Ziel einstellen" id="ziel" placeholder="Ziel einstellen">
+            <option value="Salzburg">Salzburg</option>
+            <option value="Innsbruck">Innsbruck</option>
+            <option value="Klagenfurt">Klagenfurt</option>
+            <option value="Graz">Graz</option>
+            <option value="Bregenz">Bregenz</option>
+        </select> <br> <br>
     
         <label for="anzahlPersonen">Anzahl Personen:</label>
-        <input type="number" id="anzahlPersonen" placeholder="Anzahl Personen"> <br>
+        <input type="number" id="anzahlPersonen" placeholder="Anzahl Personen"> <br> <br>
     
-        <label for="einnahmenGesamt">gesamte Einnahmen:</label> <br> <br>
+        <label for="einnahmenGesamt">gesamte Einnahmen: </label> <br> <br>
         
     
         <button onclick="ticketKaufen()">Ticket kaufen</button></h2>
