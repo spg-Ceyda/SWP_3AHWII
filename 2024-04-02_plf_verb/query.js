@@ -9,7 +9,7 @@ async function getwatchlistsname(benutzerId) {
         where: { id: benutzerId},
         include: { Watchlist: true},
     });
-    return benutzer.watchlists
+    return benutzer.watchlists;
 }
 
 
