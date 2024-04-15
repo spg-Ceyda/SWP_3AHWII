@@ -13,7 +13,8 @@ async function getwatchlistsname(benutzerId) {
 }
 
 
-async function getwatchtracks(watchlists) {
+
+async function getwatchtracks(watchlistsID) {
     const watchlist = await prisma.watchlists.findUnique({
         where: { id: watchlists},
         include: { tracks: true},
