@@ -44,7 +44,7 @@ async function seed() {
             data: {
                 name: fakerDE.word.noun(),
                 createdAt: fakerDE.date.recent(),
-                User: {
+                benutzer: {
                     connect: {
                         id: userIds[Math.floor(Math.random() * userIds.length)],
                     },
@@ -70,7 +70,7 @@ async function seed() {
                 ],
             },
             data: {
-                Track: { connect: rndTracklist },
+                tracks: { connect: rndTracklist },
             },
         });
     }
