@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 async function getwatchlistsname(benutzerId) {
     const benutzer = await prisma.benutzer.findUnique({
         where: { id: benutzerId},
-        include: { Watchlist: true},
+        include: { watchlists: true},
     });
     return benutzer.watchlists;
 }
@@ -15,7 +15,7 @@ async function getwatchlistsname(benutzerId) {
 
 
 async function getwatchtracks(watchlistsID) {
-    const watchlist = await prisma.watchlists.findUnique({
+    const watchlist = await prisma.watchlist.findUnique({
         where: { id: watchlists},
         include: { tracks: true},
     });
@@ -25,11 +25,11 @@ async function getwatchtracks(watchlistsID) {
 
 async function main() {
     try {
-      const watchlistnames = await getwatchlistname(1);
-      console.log('Watchlist-Namen für Benutzer mit ID 1:', getwatchlistsname);
+      const watchlistnames = await getwatchlistsname(1);
+      console.log('Watchlist-Namen für Benutzer mit ID 1:', watchlistnames);
   
       const trackswatchlist = await getwatchtracks(1);
-      console.log('Tracks in Watchlist mit ID 1:', getwatchtracks);
+      console.log('Tracks in Watchlist mit ID 1:', trackswatchlist);
     } 
     catch (error) {
       console.error('Error:', error);
