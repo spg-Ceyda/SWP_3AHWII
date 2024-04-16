@@ -25,7 +25,7 @@ async function getwatchtracks(watchlistsID) {
 
 async function main() {
     try {
-      const watchlistnames = await getwatchlistnames(1);
+      const watchlistnames = await getwatchlistname(1);
       console.log('Watchlist-Namen für Benutzer mit ID 1:', getwatchlistsname);
   
       const trackswatchlist = await getwatchtracks(1);
