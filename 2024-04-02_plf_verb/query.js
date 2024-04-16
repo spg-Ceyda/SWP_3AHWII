@@ -19,7 +19,7 @@ async function getwatchtracks(watchlistsID) {
         where: { id: watchlistsID},
         include: { tracks: true},
     });
-    return watchlistsID.tracks;
+    return watchlist.tracks;
 }
 
 
