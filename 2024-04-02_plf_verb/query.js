@@ -19,11 +19,11 @@ async function getWatchlistsContainingTrack(trackName) {
 
 //2
 async function getUsersWhoHasTrackInWatchlist(benutzerName) {
-    const benutzer = await prisma.benutzer.findUnique({
-        where: {name: benutzerName},
+    const benutzer = await prisma.benutzer.findFirst({
+        where: {fullname: benutzerName},
         include: {watchlists: true},
     });
-    return benutzer.watchlist;
+    return benutzer ? benutzer.watchlists : null;
 }
 
 
