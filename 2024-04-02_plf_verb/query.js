@@ -8,22 +8,29 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
-//1) auf welchen watchlists kommt der track vor? (funktioniert noch nicht)
+//1) auf welchen watchlists kommt der gegebene track vor?
 async function getWatchlistsContainingTrack(trackName) {
-    const track = await prisma.track.findMany({
+    const tracks = await prisma.track.findMany({
         where: { name: trackName },
         include: { watchlists: true },
     });
-    return track.watchlists;
+    const watchlists = [];
+    for (let i = 0; i < tracks.length; i++) {
+      const track = tracks[i];
+      for (let j = 0; j < track.watchlists.length; j++) {
+          watchlists.push(track.watchlists[j]);
+      }
+  }
+    return watchlists;
 }
 
-//2
-async function getUsersWhoHasTrackInWatchlist(benutzerName) {
-    const benutzer = await prisma.benutzer.findFirst({
-        where: {fullname: benutzerName},
-        include: {watchlists: true},
-    });
-    return benutzer ? benutzer.watchlists : null;
+//2) welche user haben den gegebenen track auf einer ihrer watchlists?
+async function getUsersWhoHaveTrackInWatchlist(trackName) {
+  const users = await prisma.benutzer.findMany({
+      where: { watchlists: { some: { tracks: { some: { name: trackName } } } } },
+      include: { watchlists: true },
+  });
+  return users;
 }
 
 
@@ -55,12 +62,12 @@ async function main() {
       // console.log('Tracks in Watchlist mit ID 1:', trackswatchlist);
 
       const trackName = "Roses Are Red"; //irgendein track aus der db
-      const watchlistsContainingTrack = await getWatchlistsContainingTrack(trackName);
-      console.log('Der Track' + trackName + 'kommt auf folgenden Watchlists vor:', watchlistsContainingTrack); 
 
-      const benutzerName = "Roses Are Red";
-      const UsersWhoHasTrackInWatchlist = await getUsersWhoHasTrackInWatchlist(benutzerName);
-      console.log('Dieser' + benutzerName + 'hat folgenden Track in ihrer Watchlist', UsersWhoHasTrackInWatchlist);
+      const watchlistsContainingTrack = await getWatchlistsContainingTrack(trackName);
+      console.log('Der Track ' + trackName + ' kommt auf folgenden Watchlists vor: ', watchlistsContainingTrack); 
+
+      const UsersWhoHaveTrackInWatchlist = await getUsersWhoHaveTrackInWatchlist(trackName);
+      console.log('Folgende Benutzer haben den Track ' + trackName + ' in einer ihrer Watchlists: ', UsersWhoHaveTrackInWatchlist);
 
     } 
     catch (error) {
