@@ -10,11 +10,20 @@ const prisma = new PrismaClient();
 
 //1) auf welchen watchlists kommt der track vor? (funktioniert noch nicht)
 async function getWatchlistsContainingTrack(trackName) {
-    const track = await prisma.track.findUnique({
+    const track = await prisma.track.findMany({
         where: { name: trackName },
         include: { watchlists: true },
     });
     return track.watchlists;
+}
+
+//2
+async function getUsersWhoHasTrackInWatchlist(benutzerName) {
+    const benutzer = await prisma.benutzer.findUnique({
+        where: {name: benutzerName},
+        include: {watchlists: true},
+    });
+    return benutzer.watchlist;
 }
 
 
@@ -48,6 +57,10 @@ async function main() {
       const trackName = "Roses Are Red"; //irgendein track aus der db
       const watchlistsContainingTrack = await getWatchlistsContainingTrack(trackName);
       console.log('Der Track' + trackName + 'kommt auf folgenden Watchlists vor:', watchlistsContainingTrack); 
+
+      const benutzerName = "Roses Are Red";
+      const UsersWhoHasTrackInWatchlist = await getUsersWhoHasTrackInWatchlist(benutzerName);
+      console.log('Dieser' + benutzerName + 'hat folgenden Track in ihrer Watchlist', UsersWhoHasTrackInWatchlist);
 
     } 
     catch (error) {
