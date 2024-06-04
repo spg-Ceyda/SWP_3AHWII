@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.sqlite3"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Bank{
+  id              String       @id @default(cuid())
+  bic             String
+  accounts        Account[]
+  customers       Customer[]
+}
+
+model Customer{
+  id              String       @id @default(cuid())
+  name            String
+  email           String
+  accounts        Account[]
+  bank            Bank        @relation(fields: [bankId], references: [id])
+  bankId          String
+}
+
+model Transaction {
+  id               String    @id @default(cuid())
+  verwendungszweck String
+  amount           String
+  date             DateTime
+  fromAcct         Account  @relation(fields: [fromAcctId], references: [id])
+  fromAcctId        String
+  toAcct           String
+  customerId       String
+  bankId           String
+}
+
+model Account {
+  id          String    @id @default(cuid())
+  iban        String
+  customers   Customer[]
+  bank        Bank      @relation(fields: [bankId], references: [id])
+  bankId      String
+  transactions  Transaction[] 
+}
